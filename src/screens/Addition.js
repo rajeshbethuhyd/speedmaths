@@ -2,6 +2,7 @@ import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import IsAnsValid from '../components/IsAnsValid';
 import {getAdNums} from '../components/getAdNums';
+import {Picker} from '@react-native-picker/picker';
 
 export default function Addition() {
   const [init, setInit] = useState(true);
@@ -41,6 +42,28 @@ export default function Addition() {
 
   return (
     <View>
+      <View style={styles.select_container}>
+        <Text style={{fontSize: 25, flex: 1}}>Level:</Text>
+        <View style={{backgroundColor: '#ddd', flex: 4}}>
+          <Picker
+            mode="dropdown"
+            selectedValue={level}
+            onValueChange={(itemValue, itemIndex) => setLevel(itemValue)}
+            style={{height: 44}}
+            itemStyle={{height: 44}}>
+            <Picker.Item label="1" value="1" />
+            <Picker.Item label="2" value="2" />
+            <Picker.Item label="3" value="3" />
+            <Picker.Item label="4" value="4" />
+            <Picker.Item label="5" value="5" />
+            <Picker.Item label="6" value="6" />
+            <Picker.Item label="7" value="7" />
+            <Picker.Item label="8" value="8" />
+            <Picker.Item label="9" value="9" />
+            <Picker.Item label="10" value="10" />
+          </Picker>
+        </View>
+      </View>
       <View style={styles.add_container}>
         <Text style={styles.NumStyles}>{numbersList}</Text>
       </View>
@@ -88,11 +111,31 @@ export default function Addition() {
         }}>
         <Text style={styles.AnsSubmitBtnText}>SUBMIT</Text>
       </Pressable>
+      <View style={styles.AnsFeedbackContainer}>
+        {ansWrong && <Text style={styles.AnsWrong}>Try Again</Text>}
+      </View>
+      <View>
+        {!showAns && (
+          <Pressable
+            style={[styles.AnsSubmitBtn, styles.ShowAnsBtn]}
+            onPress={() => {
+              setShowAns(true);
+            }}>
+            <Text style={styles.AnsSubmitBtnText}>SHOW ANSWER</Text>
+          </Pressable>
+        )}
+        {showAns && <Text style={styles.ShowAnsText}>{answer}</Text>}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  select_container: {
+    padding: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   add_container: {
     margin: 5,
     padding: 15,
@@ -130,5 +173,28 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 0.25,
     color: 'white',
+  },
+  AnsFeedbackContainer: {
+    alignItems: 'center',
+    marginTop: 15,
+    padding: 15,
+  },
+  AnsCorrect: {
+    fontSize: 35,
+    fontWeight: '600',
+    color: '#009933',
+  },
+  AnsWrong: {
+    fontSize: 35,
+    fontWeight: '600',
+    color: '#FF0000',
+  },
+  ShowAnsBtn: {
+    backgroundColor: '#ff9200',
+  },
+  ShowAnsText: {
+    fontSize: 30,
+    alignSelf: 'center',
+    color: '#ff9200',
   },
 });
