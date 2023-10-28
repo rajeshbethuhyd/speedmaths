@@ -14,31 +14,30 @@ export default function Addition() {
   const [answer, setAnswer] = useState(0);
   const [howMany, setHowMany] = useState(2); //n is How many numbers
   const [repeat, setRepeat] = useState(1); //How many times they repeat
-  const howmany_start = [2, 6, 4, 6];
-  const howmany_limit = [5, 10, 4, 6];
+  const howmany_start = [2, 6, 1, 2, 1, 2, 1, 2];
+  const howmany_limit = [5, 10, 4, 6, 3, 6, 3, 6];
 
   if (init == true) {
-    const result = AllocateNumbers(howMany);
+    const result = AllocateNumbers(howMany, level);
     console.log(result);
     setNumbersList(result[0]);
     setAnswer(result[1]);
     setInit(false);
   }
 
-  function AllocateNumbers(howMany) {
-    console.log('How many: ' + howMany);
+  function AllocateNumbers(howMany, level) {
     let ad_ans = 0;
-    const adNumList = getAdNums(10, 99, howMany);
+    const adNumList = getAdNums(howMany, level);
     adNumList.forEach(num => {
       ad_ans += num;
     });
     setRepeat(repeat + 1);
 
-    if (repeat == 2 && howMany != howmany_limit[level - 1]) {
+    if (repeat == 5 && howMany != howmany_limit[level - 1]) {
       setHowMany(howMany + 1);
       setRepeat(1);
     }
-    if (repeat == 2 && howMany == howmany_limit[level - 1]) {
+    if (repeat == 5 && howMany == howmany_limit[level - 1]) {
       setHowMany(howmany_start[level - 1]);
       setRepeat(1);
     }
@@ -69,8 +68,6 @@ export default function Addition() {
             <Picker.Item label="6" value="6" />
             <Picker.Item label="7" value="7" />
             <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
-            <Picker.Item label="10" value="10" />
           </Picker>
         </View>
       </View>
@@ -98,13 +95,11 @@ export default function Addition() {
             return;
           }
           if (IsAnsValid(userAddAns)) {
-            console.log('userAddAns: ' + userAddAns);
-            console.log('Act ans: ' + answer);
             if (userAddAns == answer) {
               setShowAns(false);
               setUserAddAns('');
-              console.log('everytime before calling HOWMANY: ' + howMany);
-              const reallocate = AllocateNumbers(howMany);
+
+              const reallocate = AllocateNumbers(howMany, level);
               console.log('New: ' + reallocate);
               setNumbersList(reallocate[0]);
               setAnswer(reallocate[1]);
