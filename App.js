@@ -8,6 +8,7 @@ import TablePractice from './src/screens/TablePractice';
 import Squares from './src/screens/Squares';
 import Cubes from './src/screens/Cubes';
 import Addition from './src/screens/Addition';
+import Subtraction from './src/screens/Subtraction';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Tables" component={Tables} />
         <Stack.Screen name="Addition" component={Addition} />
+        <Stack.Screen name="Subtraction" component={Subtraction} />
         <Stack.Screen name="Practice Tables" component={TablePractice} />
         <Stack.Screen name="Squares" component={Squares} />
         <Stack.Screen name="Cubes" component={Cubes} />

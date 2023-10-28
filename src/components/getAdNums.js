@@ -1,8 +1,8 @@
 import {getRandomNumber} from './GenerateRandNum';
-import {GetMinMax} from './GetMinMax';
+import {GetMinMaxAdd} from './GenerateRandNum';
 
 export function getAdNums(howMany, level) {
-  const list = GetMinMax(level);
+  const list = GetMinMaxAdd(level);
   adNumList = [];
   adNumList1 = [];
   adNumList2 = [];

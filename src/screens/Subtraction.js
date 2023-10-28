@@ -1,47 +1,37 @@
 import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
-import IsAnsValid from '../components/IsAnsValid';
-import {getAdNums} from '../components/getAdNums';
 import {Picker} from '@react-native-picker/picker';
+import {getSubNums} from '../components/getSubNums';
+import IsAnsValid from '../components/IsAnsValid';
 
-export default function Addition() {
+export default function Subtraction() {
   const [init, setInit] = useState(true);
   const [userAddAns, setUserAddAns] = useState('');
   const [showAns, setShowAns] = useState(false);
   const [ansWrong, setAnsWrong] = useState(false);
-  const [numbersList, setNumbersList] = useState(null);
+  const [numbers, setNumbers] = useState(null);
   const [level, setLevel] = useState(1);
   const [answer, setAnswer] = useState(0);
-  const [howMany, setHowMany] = useState(2); //n is How many numbers
-  const [repeat, setRepeat] = useState(1); //How many times they repeat
-  const howmany_start = [2, 6, 1, 2, 1, 2, 1, 2];
-  const howmany_limit = [5, 10, 4, 6, 3, 6, 3, 6];
-
+  const [negAnswer, setNegAnswer] = useState(false);
   if (init == true) {
-    const result = AllocateNumbers(howMany, level);
+    const result = AllocateNumbers(level);
     console.log(result);
-    setNumbersList(result[0]);
+    setNumbers(result[0]);
     setAnswer(result[1]);
     setInit(false);
   }
-
-  function AllocateNumbers(howMany, level) {
-    let ad_ans = 0;
-    const adNumList = getAdNums(howMany, level);
-    adNumList.forEach(num => {
-      ad_ans += num;
-    });
-    setRepeat(repeat + 1);
-
-    if (repeat == 5 && howMany != howmany_limit[level - 1]) {
-      setHowMany(howMany + 1);
-      setRepeat(1);
+  function AllocateNumbers(level) {
+    let sub_ans = 0;
+    const subNumList = getSubNums(level);
+    console.log('SubNumList: ' + subNumList);
+    if (subNumList[0] > subNumList[1]) {
+      sub_ans = subNumList[0] - subNumList[1];
+      setNegAnswer(false);
+    } else {
+      sub_ans = subNumList[1] - subNumList[0];
+      setNegAnswer(true);
     }
-    if (repeat == 5 && howMany == howmany_limit[level - 1]) {
-      setHowMany(howmany_start[level - 1]);
-      setRepeat(1);
-    }
-    return [adNumList.join(' + '), ad_ans];
+    return [subNumList.join(' - '), sub_ans];
   }
 
   return (
@@ -54,8 +44,6 @@ export default function Addition() {
             selectedValue={level}
             onValueChange={(itemValue, itemIndex) => {
               setLevel(itemValue);
-              setHowMany(howmany_start[itemValue - 1]);
-              setRepeat(1);
               setShowAns(false);
               setInit(true);
             }}
@@ -73,9 +61,10 @@ export default function Addition() {
         </View>
       </View>
       <View style={styles.add_container}>
-        <Text style={styles.NumStyles}>{numbersList}</Text>
+        <Text style={styles.NumStyles}>{numbers}</Text>
       </View>
       <View style={styles.AnsNumContainer}>
+        {negAnswer && <Text style={{fontSize: 40, fontWeight: 'bold'}}>-</Text>}
         <TextInput
           style={styles.AnsInputStyles}
           placeholder="Your Answer"
@@ -100,9 +89,9 @@ export default function Addition() {
               setShowAns(false);
               setUserAddAns('');
 
-              const reallocate = AllocateNumbers(howMany, level);
+              const reallocate = AllocateNumbers(level);
               console.log('New: ' + reallocate);
-              setNumbersList(reallocate[0]);
+              setNumbers(reallocate[0]);
               setAnswer(reallocate[1]);
               setAnsWrong(false);
             } else {
@@ -157,6 +146,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
     padding: 15,
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   AnsInputStyles: {
     fontSize: 30,
