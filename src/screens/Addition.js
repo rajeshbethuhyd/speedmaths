@@ -12,30 +12,35 @@ export default function Addition() {
   const [numbersList, setNumbersList] = useState(null);
   const [level, setLevel] = useState(1);
   const [answer, setAnswer] = useState(0);
-  const [repeat, setRepeat] = useState(1);
-  const [n, setN] = useState(2);
+  const [howMany, setHowMany] = useState(2); //n is How many numbers
+  const [repeat, setRepeat] = useState(1); //How many times they repeat
+  const howmany_start = [2, 6, 4, 6];
+  const howmany_limit = [5, 10, 4, 6];
 
   if (init == true) {
-    const result = AllocateNumbers();
+    const result = AllocateNumbers(howMany);
     console.log(result);
     setNumbersList(result[0]);
     setAnswer(result[1]);
     setInit(false);
   }
-  function AllocateNumbers() {
+
+  function AllocateNumbers(howMany) {
+    console.log('How many: ' + howMany);
     let ad_ans = 0;
-    const adNumList = getAdNums(10, 99, n);
+    const adNumList = getAdNums(10, 99, howMany);
     adNumList.forEach(num => {
       ad_ans += num;
     });
     setRepeat(repeat + 1);
-    if (repeat == 5 && n != 5) {
+
+    if (repeat == 2 && howMany != howmany_limit[level - 1]) {
+      setHowMany(howMany + 1);
       setRepeat(1);
-      setN(n + 1);
     }
-    if (repeat == 5 && n == 5) {
+    if (repeat == 2 && howMany == howmany_limit[level - 1]) {
+      setHowMany(howmany_start[level - 1]);
       setRepeat(1);
-      setN(2);
     }
     return [adNumList.join(' + '), ad_ans];
   }
@@ -44,11 +49,16 @@ export default function Addition() {
     <View>
       <View style={styles.select_container}>
         <Text style={{fontSize: 25, flex: 1}}>Level:</Text>
-        <View style={{backgroundColor: '#ddd', flex: 4}}>
+        <View style={{backgroundColor: '#ddd', flex: 4, borderRadius: 4}}>
           <Picker
             mode="dropdown"
             selectedValue={level}
-            onValueChange={(itemValue, itemIndex) => setLevel(itemValue)}
+            onValueChange={(itemValue, itemIndex) => {
+              setLevel(itemValue);
+              setHowMany(howmany_start[itemValue - 1]);
+              setRepeat(1);
+              setInit(true);
+            }}
             style={{height: 44}}
             itemStyle={{height: 44}}>
             <Picker.Item label="1" value="1" />
@@ -93,7 +103,8 @@ export default function Addition() {
             if (userAddAns == answer) {
               setShowAns(false);
               setUserAddAns('');
-              const reallocate = AllocateNumbers();
+              console.log('everytime before calling HOWMANY: ' + howMany);
+              const reallocate = AllocateNumbers(howMany);
               console.log('New: ' + reallocate);
               setNumbersList(reallocate[0]);
               setAnswer(reallocate[1]);
