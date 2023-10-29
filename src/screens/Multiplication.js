@@ -4,15 +4,15 @@ import {Picker} from '@react-native-picker/picker';
 import {getSubNums} from '../components/getSubNums';
 import IsAnsValid from '../components/IsAnsValid';
 
-export default function Subtraction() {
+export default function Multiplication() {
   const [init, setInit] = useState(true);
-  const [userSubAns, setUserSubAns] = useState('');
+  const [userMultAns, setUserMultAns] = useState('');
   const [showAns, setShowAns] = useState(false);
   const [ansWrong, setAnsWrong] = useState(false);
   const [numbers, setNumbers] = useState(null);
   const [level, setLevel] = useState(1);
   const [answer, setAnswer] = useState(0);
-  const [negAnswer, setNegAnswer] = useState(false);
+
   if (init == true) {
     const result = AllocateNumbers(level);
     console.log(result);
@@ -21,19 +21,12 @@ export default function Subtraction() {
     setInit(false);
   }
   function AllocateNumbers(level) {
-    let sub_ans = 0;
-    const subNumList = getSubNums(level);
-    console.log('SubNumList: ' + subNumList);
-    if (subNumList[0] > subNumList[1]) {
-      sub_ans = subNumList[0] - subNumList[1];
-      setNegAnswer(false);
-    } else {
-      sub_ans = subNumList[1] - subNumList[0];
-      setNegAnswer(true);
-    }
-    return [subNumList.join(' - '), sub_ans];
+    let mult_ans = 0;
+    const multNumList = getSubNums(level);
+    console.log('SubNumList: ' + multNumList);
+    mult_ans = multNumList[0] * multNumList[1];
+    return [multNumList.join(' x '), mult_ans];
   }
-
   return (
     <View>
       <View style={styles.select_container}>
@@ -57,7 +50,6 @@ export default function Subtraction() {
             <Picker.Item label="6" value="6" />
             <Picker.Item label="7" value="7" />
             <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
           </Picker>
         </View>
       </View>
@@ -65,16 +57,15 @@ export default function Subtraction() {
         <Text style={styles.NumStyles}>{numbers}</Text>
       </View>
       <View style={styles.AnsNumContainer}>
-        {negAnswer && <Text style={{fontSize: 40, fontWeight: 'bold'}}>-</Text>}
         <TextInput
           style={styles.AnsInputStyles}
           placeholder="Your Answer"
           keyboardType="numeric"
           textAlign={'center'}
-          value={userSubAns}
+          value={userMultAns}
           onChangeText={input => {
             input = input.trim();
-            setUserSubAns(input);
+            setUserMultAns(input);
           }}
         />
       </View>
@@ -82,13 +73,13 @@ export default function Subtraction() {
       <Pressable
         style={styles.AnsSubmitBtn}
         onPress={() => {
-          if (userSubAns == '') {
+          if (userMultAns == '') {
             return;
           }
-          if (IsAnsValid(userSubAns)) {
-            if (userSubAns == answer) {
+          if (IsAnsValid(userMultAns)) {
+            if (userMultAns == answer) {
               setShowAns(false);
-              setUserSubAns('');
+              setUserMultAns('');
 
               const reallocate = AllocateNumbers(level);
               console.log('New: ' + reallocate);

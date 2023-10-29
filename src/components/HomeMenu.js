@@ -23,6 +23,14 @@ export default function HomeMenu({navigation}) {
       <View style={styles.HomeMenuItemStyles}>
         <Pressable
           onPress={() => {
+            navigation.navigate('Multiplication');
+          }}>
+          <Text style={styles.HomeMenuItemText}>MULTIPLICATION</Text>
+        </Pressable>
+      </View>
+      <View style={styles.HomeMenuItemStyles}>
+        <Pressable
+          onPress={() => {
             navigation.navigate('Tables');
           }}>
           <Text style={styles.HomeMenuItemText}>TABLES</Text>

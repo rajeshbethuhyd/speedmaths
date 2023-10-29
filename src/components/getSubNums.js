@@ -12,6 +12,9 @@ export function getSubNums(level) {
   } else {
     subNumList[0] = getRandomNumber(sub_list.min, sub_list.max);
     subNumList[1] = getRandomNumber(sub_list.min2, sub_list.max2);
+    while (subNumList[0] == 1) {
+      subNumList[0] = getRandomNumber(sub_list.min, sub_list.max);
+    }
   }
   for (var i = 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));

@@ -115,11 +115,19 @@ export function GetMinMaxSub(level) {
   let sub_list = {};
   if (level == 1) {
     sub_list = {
+      min: 1,
+      max: 9,
+      min2: 10,
+      max2: 99,
+      all_same_digits: false,
+    };
+  } else if (level == 2) {
+    sub_list = {
       min: 10,
       max: 99,
       all_same_digits: true,
     };
-  } else if (level == 2) {
+  } else if (level == 3) {
     sub_list = {
       min: 10,
       max: 99,
@@ -127,13 +135,13 @@ export function GetMinMaxSub(level) {
       max2: 999,
       all_same_digits: false,
     };
-  } else if (level == 3) {
+  } else if (level == 4) {
     sub_list = {
       min: 100,
       max: 999,
       all_same_digits: true,
     };
-  } else if (level == 4) {
+  } else if (level == 5) {
     sub_list = {
       min: 100,
       max: 999,
@@ -141,13 +149,13 @@ export function GetMinMaxSub(level) {
       max2: 9999,
       all_same_digits: false,
     };
-  } else if (level == 5) {
+  } else if (level == 6) {
     sub_list = {
       min: 1000,
       max: 9999,
       all_same_digits: true,
     };
-  } else if (level == 6) {
+  } else if (level == 7) {
     sub_list = {
       min: 1000,
       max: 9999,
@@ -155,13 +163,13 @@ export function GetMinMaxSub(level) {
       max2: 99999,
       all_same_digits: false,
     };
-  } else if (level == 7) {
+  } else if (level == 8) {
     sub_list = {
       min: 10000,
       max: 99999,
       all_same_digits: true,
     };
-  } else if (level == 8) {
+  } else if (level == 9) {
     sub_list = {
       min: 10000,
       max: 99999,
