@@ -47,7 +47,7 @@ export default function Addition() {
   return (
     <View>
       <View style={styles.select_container}>
-        <Text style={{fontSize: 25, flex: 1}}>Level:</Text>
+        <Text style={{fontSize: 25, flex: 1, color: 'black'}}>Level:</Text>
         <View style={{backgroundColor: '#ddd', flex: 4, borderRadius: 4}}>
           <Picker
             mode="dropdown"
@@ -72,8 +72,17 @@ export default function Addition() {
           </Picker>
         </View>
       </View>
+      <View
+        style={{
+          padding: 20,
+          alignItems: 'center',
+        }}>
+        <Text style={{fontSize: 20}}>
+          Numbers will increase after every 5 questions
+        </Text>
+      </View>
       <View style={styles.add_container}>
-        <Text style={styles.NumStyles}>{numbersList}</Text>
+        <Text style={styles.NumStyles}>{numbersList} = ?</Text>
       </View>
       <View style={styles.AnsNumContainer}>
         <TextInput
@@ -140,6 +149,7 @@ export default function Addition() {
 const styles = StyleSheet.create({
   select_container: {
     padding: 50,
+    paddingBottom: 5,
     flexDirection: 'row',
     alignItems: 'center',
   },
