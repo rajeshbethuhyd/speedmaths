@@ -31,6 +31,14 @@ export default function HomeMenu({navigation}) {
       <View style={styles.HomeMenuItemStyles}>
         <Pressable
           onPress={() => {
+            navigation.navigate('Division');
+          }}>
+          <Text style={styles.HomeMenuItemText}>DIVISION</Text>
+        </Pressable>
+      </View>
+      <View style={styles.HomeMenuItemStyles}>
+        <Pressable
+          onPress={() => {
             navigation.navigate('Tables');
           }}>
           <Text style={styles.HomeMenuItemText}>TABLES</Text>

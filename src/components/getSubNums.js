@@ -13,6 +13,7 @@ export function getSubNums(level) {
     subNumList[0] = getRandomNumber(sub_list.min, sub_list.max);
     subNumList[1] = getRandomNumber(sub_list.min2, sub_list.max2);
     while (subNumList[0] == 1) {
+      //Remove this while() after changing minmax function
       subNumList[0] = getRandomNumber(sub_list.min, sub_list.max);
     }
   }

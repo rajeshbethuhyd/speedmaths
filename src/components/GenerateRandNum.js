@@ -115,7 +115,7 @@ export function GetMinMaxSub(level) {
   let sub_list = {};
   if (level == 1) {
     sub_list = {
-      min: 1,
+      min: 1, //change this to 2 and remove the while()
       max: 9,
       min2: 10,
       max2: 99,
@@ -179,4 +179,50 @@ export function GetMinMaxSub(level) {
     };
   }
   return sub_list;
+}
+
+export function GetMinMaxRangebyDigits(digits) {
+  let range = {};
+  if (digits == 1) {
+    range = {
+      min: 2,
+      max: 9,
+    };
+  } else if (digits == 2) {
+    range = {
+      min: 10,
+      max: 99,
+    };
+  } else if (digits == 3) {
+    range = {
+      min: 100,
+      max: 999,
+    };
+  } else if (digits == 4) {
+    range = {
+      min: 1000,
+      max: 9999,
+    };
+  } else if (digits == 5) {
+    range = {
+      min: 10000,
+      max: 99999,
+    };
+  } else if (digits == 6) {
+    range = {
+      min: 100000,
+      max: 999999,
+    };
+  } else if (digits == 7) {
+    range = {
+      min: 1000000,
+      max: 9999999,
+    };
+  } else if (digits == 8) {
+    range = {
+      min: 10000000,
+      max: 99999999,
+    };
+  }
+  return range;
 }
