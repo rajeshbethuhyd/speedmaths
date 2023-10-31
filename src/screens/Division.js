@@ -49,8 +49,8 @@ export default function Division() {
   return (
     <View>
       <View style={styles.select_container}>
-        <Text style={{fontSize: 25, flex: 1, color: 'black'}}>Level:</Text>
-        <View style={{backgroundColor: '#ddd', flex: 4, borderRadius: 4}}>
+        <Text style={{fontSize: 25, flex: 1, color: 'black'}}>Difficulty:</Text>
+        <View style={{backgroundColor: '#ddd', flex: 3, borderRadius: 4}}>
           <Picker
             mode="dropdown"
             selectedValue={level}
@@ -64,15 +64,15 @@ export default function Division() {
             }}
             style={{height: 44}}
             itemStyle={{height: 44}}>
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
+            <Picker.Item label="Level 1 Easy" value="1" />
+            <Picker.Item label="Level 1 Hard" value="2" />
+            <Picker.Item label="Level 2 Easy" value="3" />
+            <Picker.Item label="Level 2 Hard" value="4" />
+            <Picker.Item label="Level 3 Easy" value="5" />
+            <Picker.Item label="Level 3 Hard" value="6" />
+            <Picker.Item label="Level 4 Easy" value="7" />
+            <Picker.Item label="Level 4 Hard" value="8" />
+            <Picker.Item label="Level 5" value="9" />
           </Picker>
         </View>
       </View>
