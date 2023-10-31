@@ -1,4 +1,12 @@
 {
   "files.autoSave": "off",
-  "files.autoSaveDelay": 500
+  "files.autoSaveDelay": 500,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "editor.suggest.snippetsPreventQuickSuggestions": true,
+  "editor.suggestSelection": "first",
+  "editor.suggest.shareSuggestSelections": false,
+  "editor.formatOnSave": true
 }
