@@ -21,9 +21,9 @@ export default function TableItem({
 }
 const styles = StyleSheet.create({
   TableItemStyles: {
-    padding: 10,
-    margin: 5,
-    backgroundColor: '#2196F3',
+    padding: '10%',
+    margin: '5%',
+    backgroundColor: '#1D3557',
     borderRadius: 5,
   },
 });
