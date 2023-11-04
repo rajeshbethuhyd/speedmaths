@@ -6,7 +6,7 @@ import {
   StyleSheet,
   useWindowDimensions,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {MaterialCommunityIcons} from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Button, Checkbox, Switch, ActivityIndicator} from 'react-native-paper';
@@ -23,13 +23,14 @@ export default function Squares() {
   const [level, setLevel] = useState(1);
   const [shuffle, setShuffle] = useState(false);
   const [numbersList, setNumbersList] = useState([]);
-  const [unshuffledNumbers, setUnshuffledNumbers] = useState([]);
+  const [originalList, setOriginalList] = useState([]);
   const [userAns, setUserAns] = useState('');
   const [showAns, setShowAns] = useState(false);
   const [answer, setAnswer] = useState(0);
   const [ansWrong, setAnsWrong] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentNumber, setCurrentNumber] = useState(2);
   const [selectedNumbersIds, setSelectedNumbersIds] = useState([
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
   ]);
@@ -50,16 +51,13 @@ export default function Squares() {
   const [selectedData, setSelectedData] = useState([]); //Store and get this value from local DB
 
   if (init === true) {
-    console.log('INIT LIST: ' + numbersList);
     //check if selectedNumbersIds already exists in DB
     SaveSelectedNumbers(selectedNumbersIds);
     setInit(false);
     setLoading(false);
-    console.log('Loading Stopped ');
   }
 
   function SaveSelectedNumbers(selectedIds) {
-    console.log('Process Started');
     let tempSelectedData = [];
     let tempNumbersList = [];
     for (let index = 0; index < 10; index++) {
@@ -75,27 +73,52 @@ export default function Squares() {
         }
       }
     }
+    let orginal_List = tempNumbersList.slice();
+    setOriginalList(orginal_List);
     setSelectedData(tempSelectedData);
-    setUnshuffledNumbers(tempNumbersList);
-    tempNumbersList = ShuffleNumbers(tempNumbersList);
-    setNumbersList(tempNumbersList);
-    console.log('NUMBERS ASSIGNED');
-    let tempAns = tempNumbersList[currentIndex] * tempNumbersList[currentIndex];
-    setAnswer(tempAns);
-    console.log('Process ENDED');
+    setNumbersList(ShuffleNumbers(tempNumbersList, shuffle));
   }
-  function ShuffleNumbers(numberslist) {
-    if (shuffle) {
-      let arrayLength = numberslist.length;
+  function ShuffleNumbers(givenList, isShuffleTrue) {
+    if (isShuffleTrue) {
+      let arrayLength = givenList.length;
       for (let k = arrayLength - 1; k > 0; k--) {
-        // Generate random number
         let j = Math.floor(Math.random() * (k + 1));
-        let temp = numberslist[k];
-        numberslist[k] = numberslist[j];
-        numberslist[j] = temp;
+        let temp = givenList[k];
+        givenList[k] = givenList[j];
+        givenList[j] = temp;
       }
     }
-    return numberslist;
+    let tempAns = givenList[0] * givenList[0];
+    setAnswer(tempAns);
+    setCurrentNumber(givenList[0]);
+    setCurrentIndex(0);
+    return givenList;
+  }
+  function MovetoNextNumber() {
+    console.log(
+      'C_INDEX: ' +
+        (currentIndex + 1) +
+        '  |  C_VALUE: ' +
+        numbersList[currentIndex + 1],
+    );
+    if (currentIndex == numbersList.length - 1) {
+      if (shuffle) {
+        setNumbersList(ShuffleNumbers(originalList.slice(), true));
+      } else {
+        setCurrentNumber(numbersList[0]);
+        setCurrentIndex(0);
+        let ans = numbersList[0] * numbersList[0];
+        setAnswer(ans);
+      }
+    } else {
+      setCurrentNumber(numbersList[currentIndex + 1]);
+      setCurrentIndex(currentIndex + 1);
+      let ans = numbersList[currentIndex + 1] * numbersList[currentIndex + 1];
+      setAnswer(ans);
+    }
+  }
+  function UpdateCurrentNumber(index) {
+    setCurrentNumber(numbersList[index]);
   }
 
   return (
@@ -171,13 +194,15 @@ export default function Squares() {
               style={{transform: [{scaleX: 1.5}, {scaleY: 1.5}]}}
               onValueChange={() => {
                 if (shuffle === true) {
-                  setNumbersList(unshuffledNumbers);
+                  setNumbersList(originalList); //Original order
+                  setCurrentIndex(0);
+                  setCurrentNumber(originalList[0]);
+                  setAnswer(originalList[0] * originalList[0]);
                 } else {
-                  let shuffledNumbers = ShuffleNumbers(numbersList);
-                  console.log('shuffledNumbers: ' + shuffledNumbers);
+                  let origin_list = originalList.slice();
+                  let shuffledNumbers = ShuffleNumbers(origin_list, true);
                   setNumbersList(shuffledNumbers);
                 }
-                setCurrentIndex(0);
                 setShuffle(!shuffle);
               }}
             />
@@ -186,7 +211,7 @@ export default function Squares() {
       </View>
 
       <View style={styles.add_container}>
-        <Text style={styles.NumStyles}>{numbersList[currentIndex]}</Text>
+        <Text style={styles.NumStyles}>{currentNumber}</Text>
       </View>
       <View style={styles.AnsNumContainer}>
         <TextInput
@@ -211,10 +236,7 @@ export default function Squares() {
             if (userAns == answer) {
               setShowAns(false);
               setUserAns('');
-              setCurrentIndex(currentIndex + 1);
-              let ans =
-                numbersList[currentIndex + 1] * numbersList[currentIndex + 1];
-              setAnswer(ans);
+              MovetoNextNumber();
               setAnsWrong(false);
             } else {
               setShowAns(false);
