@@ -13,6 +13,7 @@ import {Button, Checkbox, Switch, ActivityIndicator} from 'react-native-paper';
 import CheckboxList from 'rn-checkbox-list';
 import Modal from 'react-native-modal';
 import IsAnsValid from '../components/IsAnsValid';
+import {getRandomNumber} from '../components/GenerateRandNum';
 
 //Upto 30 and some imp like 37 etc
 //mixed and option to select upto 50
@@ -28,7 +29,7 @@ export default function Squares() {
   const [showAns, setShowAns] = useState(false);
   const [answer, setAnswer] = useState(0);
   const [ansWrong, setAnsWrong] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [showCustomOptions, setShowCustomOptions] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentNumber, setCurrentNumber] = useState(2);
   const [selectedNumbersIds, setSelectedNumbersIds] = useState([
@@ -117,8 +118,12 @@ export default function Squares() {
       setAnswer(ans);
     }
   }
-  function UpdateCurrentNumber(index) {
-    setCurrentNumber(numbersList[index]);
+  function Generate3DNumber() {
+    let num = getRandomNumber(100, 999);
+    console.log('NUM: ' + num);
+    setCurrentNumber(num);
+    setAnswer(num * num);
+    setShowAns(false);
   }
 
   return (
@@ -145,9 +150,15 @@ export default function Squares() {
             mode="dropdown"
             selectedValue={level}
             onValueChange={(itemValue, itemIndex) => {
+              if (itemValue == 1) {
+                setInit(true);
+                setShowCustomOptions(true);
+              } else if (itemValue == 2) {
+                setShowCustomOptions(false);
+                Generate3DNumber();
+              }
               setLevel(itemValue);
               setShowAns(false);
-              setInit(true);
             }}
             style={{height: 44}}
             itemStyle={{height: 44}}>
@@ -156,59 +167,60 @@ export default function Squares() {
           </Picker>
         </View>
       </View>
-      <View style={styles.select_container}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Button
-            mode="contained"
-            icon="numeric-1-box-multiple"
-            style={{borderRadius: 5, padding: 3}}
-            buttonColor="#118ab2"
-            uppercase={true}
-            onPress={() => {
-              setVisible(true);
-            }}>
-            Choose Numebrs
-          </Button>
-        </View>
-
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+      {showCustomOptions && (
+        <View style={styles.select_container}>
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              justifyContent: 'flex-end',
+              justifyContent: 'center',
             }}>
-            <Text style={{fontSize: 25, paddingRight: 20}}>Shuffle:</Text>
-            <Switch
-              value={shuffle}
-              color="#118ab2"
-              style={{transform: [{scaleX: 1.5}, {scaleY: 1.5}]}}
-              onValueChange={() => {
-                if (shuffle === true) {
-                  setNumbersList(originalList); //Original order
-                  setCurrentIndex(0);
-                  setCurrentNumber(originalList[0]);
-                  setAnswer(originalList[0] * originalList[0]);
-                } else {
-                  let origin_list = originalList.slice();
-                  let shuffledNumbers = ShuffleNumbers(origin_list, true);
-                  setNumbersList(shuffledNumbers);
-                }
-                setShuffle(!shuffle);
-              }}
-            />
+            <Button
+              mode="contained"
+              icon="numeric-1-box-multiple"
+              style={{borderRadius: 5, padding: 3}}
+              buttonColor="#118ab2"
+              uppercase={true}
+              onPress={() => {
+                setVisible(true);
+              }}>
+              Choose Numebrs
+            </Button>
+          </View>
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+              }}>
+              <Text style={{fontSize: 25, paddingRight: 20}}>Shuffle:</Text>
+              <Switch
+                value={shuffle}
+                color="#118ab2"
+                style={{transform: [{scaleX: 1.5}, {scaleY: 1.5}]}}
+                onValueChange={() => {
+                  if (shuffle === true) {
+                    setNumbersList(originalList); //Original order
+                    setCurrentIndex(0);
+                    setCurrentNumber(originalList[0]);
+                    setAnswer(originalList[0] * originalList[0]);
+                  } else {
+                    let origin_list = originalList.slice();
+                    let shuffledNumbers = ShuffleNumbers(origin_list, true);
+                    setNumbersList(shuffledNumbers);
+                  }
+                  setShuffle(!shuffle);
+                }}
+              />
+            </View>
           </View>
         </View>
-      </View>
+      )}
 
       <View style={styles.add_container}>
         <Text style={styles.NumStyles}>{currentNumber}</Text>
@@ -234,9 +246,13 @@ export default function Squares() {
           }
           if (IsAnsValid(userAns)) {
             if (userAns == answer) {
+              if (level == 1) {
+                MovetoNextNumber();
+              } else if (level == 2) {
+                Generate3DNumber();
+              }
               setShowAns(false);
               setUserAns('');
-              MovetoNextNumber();
               setAnsWrong(false);
             } else {
               setShowAns(false);
