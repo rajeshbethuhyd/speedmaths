@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {getSubNums} from '../components/getSubNums';
 import IsAnsValid from '../components/IsAnsValid';
+import Keyboard from '../components/Keyboard';
+import AnswerBox from '../components/AnswerBox';
 
 export default function Multiplication() {
   const [init, setInit] = useState(true);
@@ -28,7 +30,7 @@ export default function Multiplication() {
     return [multNumList.join(' x '), mult_ans];
   }
   return (
-    <View>
+    <View style={{flex: 1}}>
       <View style={styles.select_container}>
         <Text style={{fontSize: 25, flex: 1}}>Level:</Text>
         <View style={{backgroundColor: '#ddd', flex: 4, borderRadius: 4}}>
@@ -57,7 +59,7 @@ export default function Multiplication() {
       <View style={styles.add_container}>
         <Text style={styles.NumStyles}>{numbers}</Text>
       </View>
-      <View style={styles.AnsNumContainer}>
+      {/* <View style={styles.AnsNumContainer}>
         <TextInput
           style={styles.AnsInputStyles}
           placeholder="Your Answer"
@@ -69,7 +71,8 @@ export default function Multiplication() {
             setUserMultAns(input);
           }}
         />
-      </View>
+      </View> */}
+      <AnswerBox inputText={userMultAns} />
 
       <Pressable
         style={styles.AnsSubmitBtn}
@@ -115,6 +118,7 @@ export default function Multiplication() {
         )}
         {showAns && <Text style={styles.ShowAnsText}>{answer}</Text>}
       </View>
+      <Keyboard userValue={userMultAns} setInput={setUserMultAns} />
     </View>
   );
 }

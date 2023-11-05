@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {getSubNums} from '../components/getSubNums';
 import IsAnsValid from '../components/IsAnsValid';
+import Keyboard from '../components/Keyboard';
 
 export default function Subtraction() {
   const [init, setInit] = useState(true);
@@ -35,7 +36,7 @@ export default function Subtraction() {
   }
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <View style={styles.select_container}>
         <Text style={{fontSize: 25, flex: 1}}>Level:</Text>
         <View style={{backgroundColor: '#ddd', flex: 4, borderRadius: 4}}>
@@ -66,17 +67,7 @@ export default function Subtraction() {
       </View>
       <View style={styles.AnsNumContainer}>
         {negAnswer && <Text style={{fontSize: 40, fontWeight: 'bold'}}>-</Text>}
-        <TextInput
-          style={styles.AnsInputStyles}
-          placeholder="Your Answer"
-          keyboardType="numeric"
-          textAlign={'center'}
-          value={userSubAns}
-          onChangeText={input => {
-            input = input.trim();
-            setUserSubAns(input);
-          }}
-        />
+        <Text style={styles.AnsInputStyles}>{userSubAns}</Text>
       </View>
 
       <Pressable
@@ -123,6 +114,7 @@ export default function Subtraction() {
         )}
         {showAns && <Text style={styles.ShowAnsText}>{answer}</Text>}
       </View>
+      <Keyboard userValue={userSubAns} setInput={setUserSubAns} />
     </View>
   );
 }
@@ -152,8 +144,10 @@ const styles = StyleSheet.create({
   },
   AnsInputStyles: {
     fontSize: 30,
+    width: '50%',
+    textAlign: 'center',
     borderBottomColor: 'black',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.4,
     color: 'black',
   },
   AnsSubmitBtn: {

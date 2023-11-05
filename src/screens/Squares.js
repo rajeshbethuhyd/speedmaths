@@ -14,6 +14,8 @@ import CheckboxList from 'rn-checkbox-list';
 import Modal from 'react-native-modal';
 import IsAnsValid from '../components/IsAnsValid';
 import {getRandomNumber} from '../components/GenerateRandNum';
+import Keyboard from '../components/Keyboard';
+import AnswerBox from '../components/AnswerBox';
 
 //Upto 30 and some imp like 37 etc
 //mixed and option to select upto 50
@@ -127,7 +129,7 @@ export default function Squares() {
   }
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <View
         style={{
           flexDirection: 'row',
@@ -225,7 +227,7 @@ export default function Squares() {
       <View style={styles.add_container}>
         <Text style={styles.NumStyles}>{currentNumber}</Text>
       </View>
-      <View style={styles.AnsNumContainer}>
+      {/* <View style={styles.AnsNumContainer}>
         <TextInput
           style={styles.AnsInputStyles}
           placeholder="Your Answer"
@@ -237,7 +239,8 @@ export default function Squares() {
             setUserAns(input);
           }}
         />
-      </View>
+      </View> */}
+      <AnswerBox inputText={userAns} />
       <Pressable
         style={styles.AnsSubmitBtn}
         onPress={() => {
@@ -288,10 +291,12 @@ export default function Squares() {
         style={{
           backgroundColor: '#fff',
           borderRadius: 8,
+          maxHeight: '80%',
         }}>
         <View
           style={{
-            height: '100%',
+            // height: '100%',
+            flex: 1,
           }}>
           <View style={styles.modalTopTitle}>
             <Text style={styles.modalTopTitleText}>Choose the Numbers</Text>
@@ -323,6 +328,7 @@ export default function Squares() {
           </View>
         </View>
       </Modal>
+      <Keyboard userValue={userAns} setInput={setUserAns} />
     </View>
   );
 }
@@ -392,7 +398,7 @@ const styles = StyleSheet.create({
     color: '#ff9200',
   },
   modalTopTitle: {
-    height: '15%',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 0.5,
@@ -403,12 +409,13 @@ const styles = StyleSheet.create({
     color: '#118ab2',
   },
   modalBody: {
-    height: '70%',
+    flex: 6,
     padding: '5%',
   },
   modalBottom: {
-    height: '15%',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
   },
 });

@@ -11,6 +11,7 @@ import IsAnsValid from '../components/IsAnsValid';
 import {getAdNums} from '../components/getAdNums';
 import {Picker} from '@react-native-picker/picker';
 import Keyboard from '../components/Keyboard';
+import AnswerBox from '../components/AnswerBox';
 
 export default function Addition() {
   const [init, setInit] = useState(true);
@@ -92,12 +93,7 @@ export default function Addition() {
       <View style={styles.add_container}>
         <Text style={styles.NumStyles}>{numbersList} = ?</Text>
       </View>
-      <View style={styles.AnsNumContainer}>
-        <View style={styles.AnsInputStyles}>
-          <Text style={styles.AnsInputText}>{userAddAns}</Text>
-        </View>
-      </View>
-
+      <AnswerBox inputText={userAddAns} />
       <Pressable
         style={styles.AnsSubmitBtn}
         onPress={() => {
@@ -164,21 +160,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#000',
   },
-  AnsNumContainer: {
-    marginTop: 15,
-    padding: 15,
-    alignItems: 'center',
-  },
-  AnsInputStyles: {
-    borderBottomColor: 'black',
-    borderBottomWidth: 0.4,
-    width: '50%',
-    alignItems: 'center',
-  },
-  AnsInputText: {
-    fontSize: 30,
-    color: 'black',
-  },
+
   AnsSubmitBtn: {
     marginHorizontal: 100,
     alignItems: 'center',

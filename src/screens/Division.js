@@ -4,6 +4,8 @@ import IsAnsValid from '../components/IsAnsValid';
 import {getAdNums} from '../components/getAdNums';
 import {Picker} from '@react-native-picker/picker';
 import {getDivNums} from '../components/getDivNums';
+import Keyboard from '../components/Keyboard';
+import AnswerBox from '../components/AnswerBox';
 
 export default function Division() {
   const [init, setInit] = useState(true);
@@ -47,7 +49,7 @@ export default function Division() {
     setAnswer(divNumList[2]);
   }
   return (
-    <View>
+    <View style={{flex: 1}}>
       <View style={styles.select_container}>
         <Text style={{fontSize: 25, flex: 1, color: 'black'}}>Difficulty:</Text>
         <View style={{backgroundColor: '#ddd', flex: 3, borderRadius: 4}}>
@@ -90,19 +92,8 @@ export default function Division() {
           {dividend} ÷ {divisor} = ?
         </Text>
       </View>
-      <View style={styles.AnsNumContainer}>
-        <TextInput
-          style={styles.AnsInputStyles}
-          placeholder="Your Answer"
-          keyboardType="numeric"
-          textAlign={'center'}
-          value={userDivAns}
-          onChangeText={input => {
-            input = input.trim();
-            setUserDivAns(input);
-          }}
-        />
-      </View>
+
+      <AnswerBox inputText={userDivAns} />
       {/* {showDecimalInfo && (
         <View style={{alignItems: 'center', marginVertical: 10}}>
           <Text style={{fontSize: 18}}>Up to 3 decimal points</Text>
@@ -148,6 +139,7 @@ export default function Division() {
         )}
         {showAns && <Text style={styles.ShowAnsText}>{answer}</Text>}
       </View>
+      <Keyboard userValue={userDivAns} setInput={setUserDivAns} />
     </View>
   );
 }

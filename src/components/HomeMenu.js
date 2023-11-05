@@ -1,5 +1,6 @@
 import {View, Text, StyleSheet, Pressable, Alert} from 'react-native';
 import React from 'react';
+import {Icon} from 'react-native-paper';
 
 export default function HomeMenu({navigation}) {
   return (
@@ -58,6 +59,24 @@ export default function HomeMenu({navigation}) {
           navigation.navigate('Cubes');
         }}>
         <Text style={styles.HomeMenuItemText}>CUBES</Text>
+      </Pressable>
+      <Pressable
+        style={styles.HomeMenuItemStyles}
+        onPress={() => {
+          navigation.navigate('FractionPercentage');
+        }}>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={styles.HomeMenuItemText}>FRACTION </Text>
+          <Icon source="swap-horizontal" color="#fff" size={28} />
+          <Text style={styles.HomeMenuItemText}> PERCENTAGE</Text>
+        </View>
+      </Pressable>
+      <Pressable
+        style={styles.HomeMenuItemStyles}
+        onPress={() => {
+          navigation.navigate('MemoryGame');
+        }}>
+        <Text style={styles.HomeMenuItemText}>MEMORY GAMES</Text>
       </Pressable>
     </View>
   );

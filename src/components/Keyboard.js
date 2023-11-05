@@ -41,7 +41,6 @@ export default function Keyboard({userValue, setInput}) {
           <KeyItem value="9" userValue={userValue} setInput={setInput} />
         </View>
         <View style={styles.rowContainer}>
-          <KeyItem value="0" userValue={userValue} setInput={setInput} />
           <Pressable
             onPress={() => {
               if (userValue == '' || userValue.includes('.')) {
@@ -56,6 +55,7 @@ export default function Keyboard({userValue, setInput}) {
             android_ripple={{color: 'rgba(0,0,0,0.25)'}}>
             <Icon source="circle-medium" color="#fff" size={20} />
           </Pressable>
+          <KeyItem value="0" userValue={userValue} setInput={setInput} />
           <Pressable
             onPress={() => {
               var string = userValue;
