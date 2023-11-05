@@ -7,14 +7,14 @@ export default function Home({navigation}) {
   return (
     <View style={styles.Container}>
       <HomeMenu navigation={navigation} />
-      <Keyboard />
     </View>
   );
 }
 const styles = StyleSheet.create({
   Container: {
     paddingTop: 10,
-    height: '100%',
+    flex: 1,
+    // height: '100%',
     backgroundColor: '#fff',
   },
 });

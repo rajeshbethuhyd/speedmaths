@@ -66,10 +66,9 @@ export default function HomeMenu({navigation}) {
 const styles = StyleSheet.create({
   HomeMenuItemStyles: {
     backgroundColor: '#118ab2',
-    borderRadius: 2,
-    padding: 10,
-    margin: 8,
-    marginHorizontal: 15,
+    padding: '1.5%',
+    marginVertical: '1%',
+    marginHorizontal: '5%',
     borderRadius: 5,
     alignItems: 'center',
   },

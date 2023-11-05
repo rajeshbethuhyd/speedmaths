@@ -1,8 +1,16 @@
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  Pressable,
+  Alert,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import IsAnsValid from '../components/IsAnsValid';
 import {getAdNums} from '../components/getAdNums';
 import {Picker} from '@react-native-picker/picker';
+import Keyboard from '../components/Keyboard';
 
 export default function Addition() {
   const [init, setInit] = useState(true);
@@ -45,7 +53,7 @@ export default function Addition() {
   }
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <View style={styles.select_container}>
         <Text style={{fontSize: 25, flex: 1, color: 'black'}}>Level:</Text>
         <View style={{backgroundColor: '#ddd', flex: 4, borderRadius: 4}}>
@@ -85,17 +93,9 @@ export default function Addition() {
         <Text style={styles.NumStyles}>{numbersList} = ?</Text>
       </View>
       <View style={styles.AnsNumContainer}>
-        <TextInput
-          style={styles.AnsInputStyles}
-          placeholder="Your Answer"
-          keyboardType="numeric"
-          textAlign={'center'}
-          value={userAddAns}
-          onChangeText={input => {
-            input = input.trim();
-            setUserAddAns(input);
-          }}
-        />
+        <View style={styles.AnsInputStyles}>
+          <Text style={styles.AnsInputText}>{userAddAns}</Text>
+        </View>
       </View>
 
       <Pressable
@@ -142,6 +142,7 @@ export default function Addition() {
         )}
         {showAns && <Text style={styles.ShowAnsText}>{answer}</Text>}
       </View>
+      <Keyboard userValue={userAddAns} setInput={setUserAddAns} />
     </View>
   );
 }
@@ -169,9 +170,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   AnsInputStyles: {
-    fontSize: 30,
     borderBottomColor: 'black',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.4,
+    width: '50%',
+    alignItems: 'center',
+  },
+  AnsInputText: {
+    fontSize: 30,
     color: 'black',
   },
   AnsSubmitBtn: {
