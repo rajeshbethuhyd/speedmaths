@@ -23,7 +23,6 @@ import AnswerBox from '../components/AnswerBox';
 //Same for cubes
 export default function Squares() {
   const [init, setInit] = useState(true);
-  const [number, setNumber] = useState(2);
   const [level, setLevel] = useState(1);
   const [shuffle, setShuffle] = useState(false);
   const [numbersList, setNumbersList] = useState([]);
