@@ -1,10 +1,11 @@
 import {View, Text, Pressable, StyleSheet, ScrollView} from 'react-native';
 import React from 'react';
-import TableItem from '../components/TableItem';
+import TableItem, {TableItemTest} from '../components/TableItem';
 
 export default function Tables({navigation}) {
   return (
     <ScrollView>
+      <TableItemTest is_mixed={true} navigation={navigation} />
       <TableItem is_mixed={true} navigation={navigation} />
       <TableItem tableNum={2} navigation={navigation} />
       <TableItem tableNum={3} navigation={navigation} />

@@ -4,6 +4,7 @@ import {
   Pressable,
   TextInput,
   StyleSheet,
+  ToastAndroid,
   useWindowDimensions,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -39,7 +40,7 @@ export default function Squares() {
   ]);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [data, setItems] = useState([
+  const [data, setData] = useState([
     {id: 1, name: '2 - 10'},
     {id: 2, name: '11 - 20'},
     {id: 3, name: '21 - 30'},
@@ -65,7 +66,7 @@ export default function Squares() {
     let tempNumbersList = [];
     for (let index = 0; index < 10; index++) {
       if (selectedIds.includes(index + 1)) {
-        tempSelectedData.push(data[index]);
+        tempSelectedData.push(data[index]); //Use the item parameter of onChange
         let initVal = (index + 1) * 10 - 9;
         let finishVal = initVal + 9;
         for (let j = initVal; j <= finishVal; j++) {
@@ -227,19 +228,7 @@ export default function Squares() {
       <View style={styles.add_container}>
         <Text style={styles.NumStyles}>{currentNumber}</Text>
       </View>
-      {/* <View style={styles.AnsNumContainer}>
-        <TextInput
-          style={styles.AnsInputStyles}
-          placeholder="Your Answer"
-          keyboardType="numeric"
-          textAlign={'center'}
-          value={userAns}
-          onChangeText={input => {
-            input = input.trim();
-            setUserAns(input);
-          }}
-        />
-      </View> */}
+
       <AnswerBox inputText={userAns} />
       <Pressable
         style={styles.AnsSubmitBtn}
@@ -308,7 +297,10 @@ export default function Squares() {
               listItems={data}
               selectedListItems={selectedData} //Update this array with function
               onChange={({ids, items}) => {
+                console.log('items: ');
+                console.log(items);
                 setSelectedNumbersIds(ids);
+                ToastAndroid.show('Updated', ToastAndroid.SHORT);
               }}
               listItemStyle={{borderBottomColor: '#eee', borderBottomWidth: 1}}
             />
@@ -323,7 +315,7 @@ export default function Squares() {
                 SaveSelectedNumbers(selectedNumbersIds);
                 setVisible(false);
               }}>
-              SUBMIT
+              close
             </Button>
           </View>
         </View>

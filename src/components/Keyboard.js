@@ -10,8 +10,6 @@ export function KeyItem({value, userValue, setInput}) {
           return;
         }
         let newValue = userValue + '' + value;
-        console.log('newValue: ');
-        console.log(newValue);
         setInput(newValue);
       }}
       style={styles.keyItem}

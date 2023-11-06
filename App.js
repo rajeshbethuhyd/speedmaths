@@ -11,6 +11,7 @@ import Addition from './src/screens/Addition';
 import Subtraction from './src/screens/Subtraction';
 import Multiplication from './src/screens/Multiplication';
 import Division from './src/screens/Division';
+import PracticeTables from './src/screens/PracticeTables';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -18,12 +19,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Tables" component={Tables} />
+        <Stack.Screen name="Tables" component={PracticeTables} />
         <Stack.Screen name="Addition" component={Addition} />
         <Stack.Screen name="Subtraction" component={Subtraction} />
         <Stack.Screen name="Multiplication" component={Multiplication} />
         <Stack.Screen name="Division" component={Division} />
-        <Stack.Screen name="Practice Tables" component={TablePractice} />
         <Stack.Screen name="Squares" component={Squares} />
         <Stack.Screen name="Cubes" component={Cubes} />
       </Stack.Navigator>

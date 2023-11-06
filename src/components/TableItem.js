@@ -19,6 +19,18 @@ export default function TableItem({
     </Pressable>
   );
 }
+
+export function TableItemTest({navigation}) {
+  return (
+    <Pressable
+      style={styles.TableItemStyles}
+      onPress={() => {
+        navigation.navigate('Practice_Tables', {});
+      }}>
+      <Text style={{color: 'white'}}>Practice Tables</Text>
+    </Pressable>
+  );
+}
 const styles = StyleSheet.create({
   TableItemStyles: {
     paddingHorizontal: '4%',
