@@ -20,12 +20,36 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Tables" component={PracticeTables} />
-        <Stack.Screen name="Addition" component={Addition} />
-        <Stack.Screen name="Subtraction" component={Subtraction} />
-        <Stack.Screen name="Multiplication" component={Multiplication} />
-        <Stack.Screen name="Division" component={Division} />
-        <Stack.Screen name="Squares" component={Squares} />
-        <Stack.Screen name="Cubes" component={Cubes} />
+        <Stack.Screen
+          name="Addition"
+          component={Addition}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="Subtraction"
+          component={Subtraction}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="Multiplication"
+          component={Multiplication}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="Division"
+          component={Division}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="Squares"
+          component={Squares}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="Cubes"
+          component={Cubes}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

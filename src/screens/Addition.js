@@ -12,8 +12,9 @@ import {getAdNums} from '../components/getAdNums';
 import {Picker} from '@react-native-picker/picker';
 import Keyboard from '../components/Keyboard';
 import AnswerBox from '../components/AnswerBox';
+import {Appbar, Icon} from 'react-native-paper';
 
-export default function Addition() {
+export default function Addition({navigation}) {
   const [init, setInit] = useState(true);
   const [userAddAns, setUserAddAns] = useState('');
   const [showAns, setShowAns] = useState(false);
@@ -25,13 +26,32 @@ export default function Addition() {
   const [repeat, setRepeat] = useState(1); //How many times they repeat
   const howmany_start = [2, 6, 1, 2, 1, 2, 1, 2];
   const howmany_limit = [5, 10, 4, 6, 3, 6, 3, 6];
-
+  const [running, setRunning] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const [timerId, setTimerId] = useState(null);
   if (init == true) {
     const result = AllocateNumbers(howMany, level);
     console.log(result);
     setNumbersList(result[0]);
     setAnswer(result[1]);
     setInit(false);
+    StartTimer();
+  }
+
+  function StartTimer() {
+    let timer = setInterval(() => {
+      setSeconds(prevSeconds => prevSeconds + 1);
+    }, 1000);
+    setTimerId(timer);
+  }
+  function StopTimer() {
+    console.log('when stopped timer: ');
+    console.log(timerId);
+    clearInterval(timerId);
+  }
+  function RestartTimer() {
+    setSeconds(0);
+    StartTimer();
   }
 
   function AllocateNumbers(howMany, level) {
@@ -52,9 +72,29 @@ export default function Addition() {
     }
     return [adNumList.join(' + '), ad_ans];
   }
-
+  const formatTime = timeInSeconds => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
+      2,
+      '0',
+    )}`;
+  };
   return (
     <View style={{flex: 1}}>
+      <Appbar.Header mode="small">
+        <Appbar.BackAction
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+        <Appbar.Content title="Title" />
+        <Appbar.Action icon="calendar" onPress={() => {}} />
+        <Appbar.Action icon="magnify" onPress={() => {}} />
+      </Appbar.Header>
+      <View style={{alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={styles.timerText}>{formatTime(seconds)}</Text>
+      </View>
       <View style={styles.select_container}>
         <Text style={{fontSize: 25, flex: 1, color: 'black'}}>Level:</Text>
         <View style={{backgroundColor: '#ddd', flex: 4, borderRadius: 4}}>
@@ -86,7 +126,7 @@ export default function Addition() {
           padding: 20,
           alignItems: 'center',
         }}>
-        <Text style={{fontSize: 20}}>
+        <Text style={{fontSize: 20, color: '#000000'}}>
           Numbers will increase after every 5 questions
         </Text>
       </View>
@@ -104,12 +144,11 @@ export default function Addition() {
             if (userAddAns == answer) {
               setShowAns(false);
               setUserAddAns('');
-
               const reallocate = AllocateNumbers(howMany, level);
-              console.log('New: ' + reallocate);
               setNumbersList(reallocate[0]);
               setAnswer(reallocate[1]);
               setAnsWrong(false);
+              RestartTimer();
             } else {
               setShowAns(false);
               setAnsWrong(true);
@@ -132,6 +171,7 @@ export default function Addition() {
             style={[styles.AnsSubmitBtn, styles.ShowAnsBtn]}
             onPress={() => {
               setShowAns(true);
+              StopTimer();
             }}>
             <Text style={styles.AnsSubmitBtnText}>SHOW ANSWER</Text>
           </Pressable>
@@ -144,9 +184,12 @@ export default function Addition() {
 }
 
 const styles = StyleSheet.create({
+  timerText: {
+    fontSize: 25,
+  },
   select_container: {
-    padding: 50,
-    paddingBottom: 5,
+    paddingHorizontal: 50,
+    paddingVertical: 5,
     flexDirection: 'row',
     alignItems: 'center',
   },
