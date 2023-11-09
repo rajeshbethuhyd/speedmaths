@@ -84,7 +84,7 @@ export default function CubeRoots({navigation}) {
       </View>
 
       <View style={styles.add_container}>
-        <Text style={styles.NumStyles}>∛{currentNumber}</Text>
+        <Text style={styles.NumStyles}>∛{currentNumber} = ?</Text>
       </View>
 
       <AnswerBox inputText={userAns} />

@@ -234,6 +234,8 @@ export default function Cubes({navigation}) {
 
       <View style={styles.add_container}>
         <Text style={styles.NumStyles}>{currentNumber}</Text>
+        <Text style={styles.CubeStyles}>³</Text>
+        <Text style={styles.NumStyles}> = ?</Text>
       </View>
 
       <AnswerBox inputText={userAns} />
@@ -342,10 +344,17 @@ const styles = StyleSheet.create({
     margin: '1%',
     padding: '1%',
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   NumStyles: {
     fontSize: 40,
     color: '#000',
+  },
+  CubeStyles: {
+    alignSelf: 'flex-start',
+    color: '#000',
+    fontSize: 30,
   },
   AnsNumContainer: {
     marginTop: '2%',
