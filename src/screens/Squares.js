@@ -10,7 +10,14 @@ import {
 import React, {useEffect, useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {MaterialCommunityIcons} from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Button, Checkbox, Switch, ActivityIndicator} from 'react-native-paper';
+import {
+  Button,
+  Appbar,
+  Checkbox,
+  Switch,
+  ActivityIndicator,
+} from 'react-native-paper';
+
 import CheckboxList from 'rn-checkbox-list';
 import Modal from 'react-native-modal';
 import IsAnsValid from '../components/IsAnsValid';
@@ -21,7 +28,7 @@ import AnswerBox from '../components/AnswerBox';
 //Upto 30 and some imp like 37 etc
 //mixed and option to select upto 50
 //Same for cubes
-export default function Squares() {
+export default function Squares({navigation}) {
   const [init, setInit] = useState(true);
   const [level, setLevel] = useState(1);
   const [shuffle, setShuffle] = useState(false);
@@ -130,6 +137,16 @@ export default function Squares() {
 
   return (
     <View style={{flex: 1}}>
+      <Appbar.Header>
+        <Appbar.BackAction
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+        <Appbar.Content title="Squares" />
+        <Appbar.Action icon="calendar" onPress={() => {}} />
+        <Appbar.Action icon="magnify" onPress={() => {}} />
+      </Appbar.Header>
       <View
         style={{
           flexDirection: 'row',
@@ -249,11 +266,6 @@ export default function Squares() {
               setShowAns(false);
               setAnsWrong(true);
             }
-          } else {
-            Alert.alert(
-              'Invalid Input',
-              "Please don't use any special symbols.",
-            );
           }
         }}>
         <Text style={styles.AnsSubmitBtnText}>SUBMIT</Text>

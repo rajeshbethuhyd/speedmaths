@@ -12,6 +12,8 @@ import Subtraction from './src/screens/Subtraction';
 import Multiplication from './src/screens/Multiplication';
 import Division from './src/screens/Division';
 import PracticeTables from './src/screens/PracticeTables';
+import SquareRoots from './src/screens/SquareRoots';
+import CubeRoots from './src/screens/CubeRoots';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -46,8 +48,19 @@ export default function App() {
           options={{headerShown: false, animation: 'slide_from_right'}}
         />
         <Stack.Screen
+          name="SquareRoots"
+          component={SquareRoots}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+
+        <Stack.Screen
           name="Cubes"
           component={Cubes}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="CubesRoots"
+          component={CubeRoots}
           options={{headerShown: false, animation: 'slide_from_right'}}
         />
       </Stack.Navigator>

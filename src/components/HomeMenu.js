@@ -52,13 +52,33 @@ export default function HomeMenu({navigation}) {
         }}>
         <Text style={styles.HomeMenuItemText}>SQUARES</Text>
       </Pressable>
-
+      <Pressable
+        style={styles.HomeMenuItemStyles}
+        onPress={() => {
+          navigation.navigate('SquareRoots');
+        }}>
+        <Text style={styles.HomeMenuItemText}>SQUARE ROOTS</Text>
+      </Pressable>
       <Pressable
         style={styles.HomeMenuItemStyles}
         onPress={() => {
           navigation.navigate('Cubes');
         }}>
         <Text style={styles.HomeMenuItemText}>CUBES</Text>
+      </Pressable>
+      <Pressable
+        style={styles.HomeMenuItemStyles}
+        onPress={() => {
+          navigation.navigate('CubesRoots');
+        }}>
+        <Text style={styles.HomeMenuItemText}>CUBE ROOTS</Text>
+      </Pressable>
+      <Pressable
+        style={styles.HomeMenuItemStyles}
+        onPress={() => {
+          navigation.navigate('Cubes');
+        }}>
+        <Text style={styles.HomeMenuItemText}>EXPONENTS</Text>
       </Pressable>
       <Pressable
         style={styles.HomeMenuItemStyles}
@@ -74,9 +94,23 @@ export default function HomeMenu({navigation}) {
       <Pressable
         style={styles.HomeMenuItemStyles}
         onPress={() => {
-          navigation.navigate('MemoryGame');
+          navigation.navigate('Cubes');
         }}>
-        <Text style={styles.HomeMenuItemText}>MEMORY GAMES</Text>
+        <Text style={styles.HomeMenuItemText}>DECIMALS</Text>
+      </Pressable>
+      <Pressable
+        style={styles.HomeMenuItemStyles}
+        onPress={() => {
+          navigation.navigate('Cubes');
+        }}>
+        <Text style={styles.HomeMenuItemText}>FRACTIONS</Text>
+      </Pressable>
+      <Pressable
+        style={styles.HomeMenuItemStyles}
+        onPress={() => {
+          navigation.navigate('Cubes');
+        }}>
+        <Text style={styles.HomeMenuItemText}>TRIGONOMETRIC TRIPLETS</Text>
       </Pressable>
     </View>
   );

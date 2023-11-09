@@ -10,7 +10,13 @@ import {
 import React, {useEffect, useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {MaterialCommunityIcons} from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Button, Checkbox, Switch, ActivityIndicator} from 'react-native-paper';
+import {
+  Button,
+  Checkbox,
+  Switch,
+  ActivityIndicator,
+  Appbar,
+} from 'react-native-paper';
 import CheckboxList from 'rn-checkbox-list';
 import Modal from 'react-native-modal';
 import IsAnsValid from '../components/IsAnsValid';
@@ -18,7 +24,7 @@ import {getRandomNumber} from '../components/GenerateRandNum';
 import Keyboard from '../components/Keyboard';
 import AnswerBox from '../components/AnswerBox';
 
-export default function Cubes() {
+export default function Cubes({navigation}) {
   const [init, setInit] = useState(true);
   const [level, setLevel] = useState(1);
   const [shuffle, setShuffle] = useState(false);
@@ -120,6 +126,16 @@ export default function Cubes() {
   }
   return (
     <View style={{flex: 1}}>
+      <Appbar.Header>
+        <Appbar.BackAction
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+        <Appbar.Content title="Cubes" />
+        <Appbar.Action icon="calendar" onPress={() => {}} />
+        <Appbar.Action icon="magnify" onPress={() => {}} />
+      </Appbar.Header>
       <View
         style={{
           flexDirection: 'row',
