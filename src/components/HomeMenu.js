@@ -1,10 +1,17 @@
-import {View, Text, StyleSheet, Pressable, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Alert,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import {Icon} from 'react-native-paper';
 
 export default function HomeMenu({navigation}) {
   return (
-    <View>
+    <ScrollView>
       <Pressable
         style={styles.HomeMenuItemStyles}
         onPress={() => {
@@ -112,7 +119,7 @@ export default function HomeMenu({navigation}) {
         }}>
         <Text style={styles.HomeMenuItemText}>TRIGONOMETRIC TRIPLETS</Text>
       </Pressable>
-    </View>
+    </ScrollView>
   );
 }
 
