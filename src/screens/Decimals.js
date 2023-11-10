@@ -5,9 +5,10 @@ import {getSubNums} from '../components/getSubNums';
 import IsAnsValid from '../components/IsAnsValid';
 import Keyboard from '../components/Keyboard';
 import AnswerBox from '../components/AnswerBox';
+import {GetDecimals} from '../HelperFunctions';
 import {Appbar} from 'react-native-paper';
 
-export default function Multiplication({navigation}) {
+export default function Decimals({navigation}) {
   const [init, setInit] = useState(true);
   const [userMultAns, setUserMultAns] = useState('');
   const [showAns, setShowAns] = useState(false);
@@ -15,20 +16,16 @@ export default function Multiplication({navigation}) {
   const [numbers, setNumbers] = useState(null);
   const [level, setLevel] = useState(1);
   const [answer, setAnswer] = useState(0);
-
   if (init == true) {
-    const result = AllocateNumbers(level);
-    console.log(result);
-    setNumbers(result[0]);
-    setAnswer(result[1]);
+    AllocateNumbers(level);
     setInit(false);
   }
   function AllocateNumbers(level) {
-    let mult_ans = 0;
-    const multNumList = getSubNums(level);
-    console.log('SubNumList: ' + multNumList);
-    mult_ans = multNumList[0] * multNumList[1];
-    return [multNumList.join(' x '), mult_ans];
+    const NumList = GetDecimals(level);
+    console.log('Decimals List: ' + NumList);
+    let tempNum = NumList[0] + ' x ' + NumList[1];
+    setNumbers(tempNum);
+    setAnswer(NumList[2]);
   }
   return (
     <View style={{flex: 1}}>
@@ -38,7 +35,7 @@ export default function Multiplication({navigation}) {
             navigation.goBack();
           }}
         />
-        <Appbar.Content title="Multiplication" />
+        <Appbar.Content title="Decimals" />
         {/* <Appbar.Action icon="calendar" onPress={() => {}} />
         <Appbar.Action icon="magnify" onPress={() => {}} /> */}
       </Appbar.Header>
@@ -51,19 +48,13 @@ export default function Multiplication({navigation}) {
             onValueChange={(itemValue, itemIndex) => {
               setLevel(itemValue);
               setShowAns(false);
-              setInit(true);
+              AllocateNumbers(itemValue);
             }}
             style={{height: 44}}
             itemStyle={{height: 44}}>
             <Picker.Item label="1" value="1" />
             <Picker.Item label="2" value="2" />
             <Picker.Item label="3" value="3" />
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
           </Picker>
         </View>
       </View>
@@ -83,11 +74,7 @@ export default function Multiplication({navigation}) {
             if (userMultAns == answer) {
               setShowAns(false);
               setUserMultAns('');
-
-              const reallocate = AllocateNumbers(level);
-              console.log('New: ' + reallocate);
-              setNumbers(reallocate[0]);
-              setAnswer(reallocate[1]);
+              AllocateNumbers(level);
               setAnsWrong(false);
             } else {
               setShowAns(false);

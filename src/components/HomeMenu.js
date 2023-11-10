@@ -101,21 +101,21 @@ export default function HomeMenu({navigation}) {
       <Pressable
         style={styles.HomeMenuItemStyles}
         onPress={() => {
-          navigation.navigate('Cubes');
+          navigation.navigate('Decimals');
         }}>
         <Text style={styles.HomeMenuItemText}>DECIMALS</Text>
       </Pressable>
       <Pressable
         style={styles.HomeMenuItemStyles}
         onPress={() => {
-          navigation.navigate('Cubes');
+          navigation.navigate('');
         }}>
         <Text style={styles.HomeMenuItemText}>FRACTIONS</Text>
       </Pressable>
       <Pressable
         style={styles.HomeMenuItemStyles}
         onPress={() => {
-          navigation.navigate('Cubes');
+          navigation.navigate('');
         }}>
         <Text style={styles.HomeMenuItemText}>TRIGONOMETRIC TRIPLETS</Text>
       </Pressable>

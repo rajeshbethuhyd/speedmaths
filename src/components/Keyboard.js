@@ -45,8 +45,6 @@ export default function Keyboard({userValue, setInput}) {
                 return;
               }
               let newValue = userValue + '.';
-              let ans = '.1' + 0.2;
-              console.log(ans);
               setInput(newValue);
             }}
             style={styles.keyItem}
