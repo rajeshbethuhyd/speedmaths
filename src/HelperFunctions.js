@@ -36,7 +36,6 @@ export function GetDecimals(level) {
     while (excludedNums.includes(numbersList[1])) {
       numbersList[1] = getRandomNumber(10, 99);
     }
-    console.log('Level 3 numbers:' + numbersList);
     while (numbersList[0] == numbersList[1]) {
       numbersList[1] = getRandomNumber(10, 99);
     }

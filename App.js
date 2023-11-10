@@ -15,6 +15,7 @@ import PracticeTables from './src/screens/PracticeTables';
 import SquareRoots from './src/screens/SquareRoots';
 import CubeRoots from './src/screens/CubeRoots';
 import Decimals from './src/screens/Decimals';
+import FractionPercentage from './src/screens/FractionPercentage';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -67,6 +68,11 @@ export default function App() {
         <Stack.Screen
           name="Decimals"
           component={Decimals}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="FractionPercentage"
+          component={FractionPercentage}
           options={{headerShown: false, animation: 'slide_from_right'}}
         />
       </Stack.Navigator>
