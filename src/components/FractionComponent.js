@@ -1,14 +1,15 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-export default function FractionComponent({num, denom}) {
-  const is_num_great = num > denom;
+export default function FractionComponent({num, denom, showBar = true}) {
+  const is_num_great = num * 1 > denom * 1;
   return (
     <View style={styles.fractionContainerStyle}>
-      <View style={is_num_great ? styles.numContainer : ''}>
+      <View style={is_num_great && showBar == true ? styles.numContainer : ''}>
         <Text style={styles.fractionTextStyle}>{num}</Text>
       </View>
-      <View style={!is_num_great ? styles.denomContainer : ''}>
+      <View
+        style={!is_num_great && showBar == true ? styles.denomContainer : ''}>
         <Text style={styles.denomstyle}>{denom}</Text>
       </View>
     </View>
@@ -20,17 +21,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   numContainer: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
+    borderBottomColor: '#000',
   },
   denomContainer: {
-    borderTopWidth: 1,
+    borderTopWidth: 2,
+    borderTopColor: '#000',
   },
   fractionTextStyle: {
     fontSize: 30,
-    color: '#118AB2',
+    color: '#000',
   },
   denomstyle: {
     fontSize: 30,
-    color: '#118AB2',
+    color: '#000',
   },
 });

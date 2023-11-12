@@ -39,8 +39,6 @@ export default function Multiplication({navigation}) {
           }}
         />
         <Appbar.Content title="Multiplication" />
-        {/* <Appbar.Action icon="calendar" onPress={() => {}} />
-        <Appbar.Action icon="magnify" onPress={() => {}} /> */}
       </Appbar.Header>
       <View style={styles.select_container}>
         <Text style={{fontSize: 25, flex: 1}}>Level:</Text>
