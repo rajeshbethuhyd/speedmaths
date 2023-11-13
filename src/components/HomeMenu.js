@@ -83,13 +83,6 @@ export default function HomeMenu({navigation}) {
       <Pressable
         style={styles.HomeMenuItemStyles}
         onPress={() => {
-          navigation.navigate('Cubes');
-        }}>
-        <Text style={styles.HomeMenuItemText}>EXPONENTS</Text>
-      </Pressable>
-      <Pressable
-        style={styles.HomeMenuItemStyles}
-        onPress={() => {
           navigation.navigate('FractionPercentage');
         }}>
         <View style={{flexDirection: 'row'}}>

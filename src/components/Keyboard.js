@@ -210,11 +210,11 @@ export default function Keyboard({
               var string = userValue;
               string = string.slice(0, -1);
               setInput(string);
-              if (isDenomTrue == false) {
+              if (isDenomTrue == false && mode != null) {
                 let string = userNum;
                 string = string.slice(0, -1);
                 setUserNum(string);
-              } else {
+              } else if (isDenomTrue == true && mode != null) {
                 if (userDenom == '') {
                   setIsDenomTrue(false);
                   setShowBar(false);

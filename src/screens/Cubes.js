@@ -92,12 +92,6 @@ export default function Cubes({navigation}) {
     return givenList;
   }
   function MovetoNextNumber() {
-    console.log(
-      'C_INDEX: ' +
-        (currentIndex + 1) +
-        '  |  C_VALUE: ' +
-        numbersList[currentIndex + 1],
-    );
     if (currentIndex == numbersList.length - 1) {
       if (shuffle) {
         setNumbersList(ShuffleNumbers(originalList.slice(), true));

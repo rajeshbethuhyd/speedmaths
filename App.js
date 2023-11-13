@@ -65,14 +65,15 @@ export default function App() {
           component={CubeRoots}
           options={{headerShown: false, animation: 'slide_from_right'}}
         />
-        <Stack.Screen
-          name="Decimals"
-          component={Decimals}
-          options={{headerShown: false, animation: 'slide_from_right'}}
-        />
+
         <Stack.Screen
           name="FractionPercentage"
           component={FractionPercentage}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="Decimals"
+          component={Decimals}
           options={{headerShown: false, animation: 'slide_from_right'}}
         />
       </Stack.Navigator>

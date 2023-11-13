@@ -2,7 +2,12 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 export default function FractionComponent({num, denom, showBar = true}) {
-  const is_num_great = num * 1 > denom * 1;
+  if (denom != '') {
+    denom = denom * 1;
+  }
+  const is_num_great = num * 1 > denom;
+  console.log('is_num_great');
+  console.log(is_num_great);
   return (
     <View style={styles.fractionContainerStyle}>
       <View style={is_num_great && showBar == true ? styles.numContainer : ''}>

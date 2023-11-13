@@ -55,6 +55,7 @@ export default function FractionPercentage({navigation}) {
     }
     setNum(result[0][0]);
     setDenom(result[0][1]);
+    setShowBar(false);
   }
   function CheckUserAns() {
     if (num == userNum && denom == userDenom) {
@@ -82,9 +83,11 @@ export default function FractionPercentage({navigation}) {
             onValueChange={(itemValue, itemIndex) => {
               setMode(itemValue);
               setShowAns(false);
+              setUserMultAns('');
               setUserNum('');
               setUserDenom('');
               setIsDenomTrue(false);
+              setAnsWrong(false);
               setInit(true);
             }}
             style={{height: 44}}

@@ -94,6 +94,7 @@ export default function PracticeTables({navigation, route}) {
   const [tableNum, setTableNum] = useState(table);
   const [randNum, setRandNum] = useState(randomNum);
   const answer = tableNum * randNum;
+  console.log('Table: ' + tableNum + ' randNum: ' + randNum);
 
   return (
     <View style={{flex: 1}}>
