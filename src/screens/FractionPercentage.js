@@ -8,7 +8,10 @@ import AnswerBox from '../components/AnswerBox';
 import {Appbar} from 'react-native-paper';
 import {Icon} from 'react-native-paper';
 import FractionComponent from '../components/FractionComponent';
-import {FractionPercentageValuesEasy} from '../HelperFunctions';
+import {
+  FractionPercentageValuesEasy,
+  FractionPercentageValuesMore,
+} from '../HelperFunctions';
 
 export default function FractionPercentage({navigation}) {
   const [init, setInit] = useState(true);
@@ -30,10 +33,9 @@ export default function FractionPercentage({navigation}) {
     setInit(false);
   }
   function AllocateNumbers(mode) {
-    console.log('CALLED');
     let result;
     if (mode <= 2) {
-      result = FractionPercentageValuesEasy(mode);
+      result = FractionPercentageValuesEasy();
       if (mode == 1) {
         setAnswer(result[1]);
       } else if (mode == 2) {
@@ -42,7 +44,7 @@ export default function FractionPercentage({navigation}) {
         setAnswer(temp_ans);
       }
     } else {
-      result = FractionPercentageValuesEasy(mode);
+      result = FractionPercentageValuesMore();
       if (mode == 3) {
         setAnswer(result[1]);
       } else if (mode == 4) {
@@ -53,6 +55,13 @@ export default function FractionPercentage({navigation}) {
     }
     setNum(result[0][0]);
     setDenom(result[0][1]);
+  }
+  function CheckUserAns() {
+    if (num == userNum && denom == userDenom) {
+      return true;
+    } else {
+      return false;
+    }
   }
   return (
     <View style={{flex: 1}}>
@@ -106,13 +115,11 @@ export default function FractionPercentage({navigation}) {
       <Pressable
         style={styles.AnsSubmitBtn}
         onPress={() => {
-          if (userMultAns == '') {
-            return;
-          }
-          if (IsAnsValid(userMultAns)) {
-            if (userMultAns == answer) {
+          if (mode == 2 || mode == 4) {
+            if (CheckUserAns()) {
               setShowAns(false);
-              setUserMultAns('');
+              setUserNum('');
+              setUserDenom('');
               AllocateNumbers(mode);
               setAnsWrong(false);
               setIsDenomTrue(false);
@@ -121,10 +128,18 @@ export default function FractionPercentage({navigation}) {
               setAnsWrong(true);
             }
           } else {
-            Alert.alert(
-              'Invalid Input',
-              "Please don't use any special symbols.",
-            );
+            if (userMultAns == '') {
+              return;
+            }
+            if (userMultAns == answer) {
+              setShowAns(false);
+              setUserMultAns('');
+              AllocateNumbers(mode);
+              setAnsWrong(false);
+            } else {
+              setShowAns(false);
+              setAnsWrong(true);
+            }
           }
         }}>
         <Text style={styles.AnsSubmitBtnText}>SUBMIT</Text>

@@ -11,7 +11,7 @@ import {Icon} from 'react-native-paper';
 
 export default function HomeMenu({navigation}) {
   return (
-    <ScrollView>
+    <ScrollView style={styles.HomeMenuStyles}>
       <Pressable
         style={styles.HomeMenuItemStyles}
         onPress={() => {
@@ -124,6 +124,7 @@ export default function HomeMenu({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  HomeMenuStyles: {},
   HomeMenuItemStyles: {
     backgroundColor: '#118ab2',
     padding: '1.5%',

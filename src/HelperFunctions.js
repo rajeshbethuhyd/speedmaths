@@ -46,6 +46,7 @@ export function GetDecimals(level) {
   }
   return numbersList;
 }
+
 const fractionsEasy = [
   '1 / 2',
   '1 / 3',
@@ -64,7 +65,6 @@ const fractionsEasy = [
   '1 / 12',
   '1 / 16',
 ];
-
 const percentagesEasy = [
   50, 33.33, 66.66, 25, 75, 20, 40, 60, 80, 16.66, 14.28, 12.5, 11.11, 9.09,
   8.33, 6.25,
@@ -72,7 +72,7 @@ const percentagesEasy = [
 var tempFractions = fractionsEasy.slice();
 var tempPercentages = percentagesEasy.slice();
 let lastRandomFraction = null;
-export function FractionPercentageValuesEasy(type) {
+export function FractionPercentageValuesEasy() {
   let newBeginnning = false;
 
   if (tempFractions.length == 0) {
@@ -88,9 +88,6 @@ export function FractionPercentageValuesEasy(type) {
   }
   const fractionarray = randomFraction.split(' / ');
   const percentage = tempPercentages[randomIndex];
-  console.log('RANDOM NUM: ' + randomFraction);
-  console.log('INDEX: ' + randomIndex);
-  console.log('PERCE: ' + percentage);
   tempFractions.splice(randomIndex, 1);
   tempPercentages.splice(randomIndex, 1);
   if (tempFractions.length == 0) {
@@ -99,45 +96,64 @@ export function FractionPercentageValuesEasy(type) {
 
   return [fractionarray, percentage];
 }
-export function FractionPercentageValuesMore(level) {
-  const fractionsMore = [
-    5 / 6,
-    2 / 7,
-    3 / 7, //Think about Sevens
-    4 / 7,
-    5 / 7,
-    6 / 7,
-    3 / 8,
-    5 / 8,
-    7 / 8,
-    2 / 9,
-    4 / 9,
-    5 / 9,
-    7 / 9,
-    8 / 9,
-    2 / 11,
-    3 / 11,
-    4 / 11,
-    5 / 11,
-    6 / 11,
-    7 / 11,
-    8 / 11,
-    9 / 11,
-    10 / 11,
-    5 / 12,
-    7 / 12,
-    11 / 12,
-  ];
-  const percentagesMore = [
-    83.33, 28.57, 42.85, 57.14, 71.42, 85.71, 37.5, 62.5, 87.5, 22.22, 44.44,
-    55.55, 77.77, 88.88, 18.18, 27.27, 36.36, 45.45, 54.54, 63.63, 72.72, 81.81,
-    90.9, 41.66, 58.33, 91.66,
-  ];
-  if (type == 3) {
-  } else if (type == 4) {
+const fractionsMore = [
+  '5 / 6',
+  '2 / 7',
+  '3 / 7', //Add special notes about this
+  '4 / 7',
+  '5 / 7',
+  '6 / 7',
+  '3 / 8',
+  '5 / 8',
+  '7 / 8',
+  '2 / 9',
+  '4 / 9',
+  '5 / 9',
+  '7 / 9',
+  '8 / 9',
+  '2 / 11',
+  '3 / 11',
+  '4 / 11',
+  '5 / 11',
+  '6 / 11',
+  '7 / 11',
+  '8 / 11',
+  '9 / 11',
+  '10 / 11',
+  '5 / 12',
+  '7 / 12',
+  '11 / 12',
+];
+const percentagesMore = [
+  83.33, 28.56, 42.84, 57.12, 71.4, 85.68, 37.5, 62.5, 87.5, 22.22, 44.44,
+  55.55, 77.77, 88.88, 18.18, 27.27, 36.36, 45.45, 54.54, 63.63, 72.72, 81.81,
+  90.9, 41.66, 58.33, 91.66,
+];
+var tempFractions2 = fractionsMore.slice();
+var tempPercentages2 = percentagesMore.slice();
+let lastRandomFraction2 = null;
+export function FractionPercentageValuesMore() {
+  let newBeginnning = false;
+
+  if (tempFractions2.length == 0) {
+    newBeginnning = true;
+    tempFractions2 = fractionsMore.slice();
+    tempPercentages2 = percentagesMore.slice();
+  }
+  let randomIndex = getRandomNumber(0, tempFractions2.length - 1);
+  let randomFraction = tempFractions2[randomIndex];
+  console.log('randomFraction: ' + randomFraction);
+  while (newBeginnning == true && lastRandomFraction2 == randomFraction) {
+    randomIndex = getRandomNumber(0, tempFractions2.length - 1);
+    randomFraction = tempFractions2[randomIndex];
+  }
+  const fractionarray = randomFraction.split(' / ');
+  const percentage = tempPercentages2[randomIndex];
+  tempFractions2.splice(randomIndex, 1);
+  tempPercentages2.splice(randomIndex, 1);
+  if (tempFractions2.length == 0) {
+    lastRandomFraction2 = randomFraction;
   }
 
-  // const num = ;
-  // const denom = ;
-  // const ans = ;
+  return [fractionarray, percentage];
 }

@@ -20,14 +20,12 @@ export function KeyItem({
           return;
         }
 
-        console.log('isDenomTrue: ' + isDenomTrue);
         if ((mode == 2 || mode == 4) && isDenomTrue == false) {
           let newValue = userNum + '' + value;
           setUserNum(newValue);
           // setInput(newValue);
         } else if ((mode == 2 || mode == 4) && isDenomTrue == true) {
           let newValue = userDenom + '' + value;
-          console.log('value: ' + newValue);
           setUserDenom(newValue);
           // setInput(newValue);
         } else if (mode == null || mode == 1 || mode == 3) {
@@ -213,8 +211,6 @@ export default function Keyboard({
               string = string.slice(0, -1);
               setInput(string);
               if (isDenomTrue == false) {
-                console.log('Denom FALSE');
-                console.log(userNum);
                 let string = userNum;
                 string = string.slice(0, -1);
                 setUserNum(string);
@@ -223,8 +219,6 @@ export default function Keyboard({
                   setIsDenomTrue(false);
                   setShowBar(false);
                 }
-                console.log('Den true');
-                console.log(userDenom);
                 let string = userDenom;
                 string = string.slice(0, -1);
                 setUserDenom(string);
