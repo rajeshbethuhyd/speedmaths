@@ -101,16 +101,30 @@ export default function HomeMenu({navigation}) {
       <Pressable
         style={styles.HomeMenuItemStyles}
         onPress={() => {
-          navigation.navigate('');
+          navigation.navigate('Triplets');
         }}>
-        <Text style={styles.HomeMenuItemText}>FRACTIONS</Text>
+        <Text style={styles.HomeMenuItemText}>TRIGONOMETRIC TRIPLETS</Text>
       </Pressable>
       <Pressable
         style={styles.HomeMenuItemStyles}
         onPress={() => {
-          navigation.navigate('');
+          navigation.navigate('NetDiscount');
         }}>
-        <Text style={styles.HomeMenuItemText}>TRIGONOMETRIC TRIPLETS</Text>
+        <Text style={styles.HomeMenuItemText}>NET DISCOUNT</Text>
+      </Pressable>
+      <Pressable
+        style={styles.HomeMenuItemStyles}
+        onPress={() => {
+          navigation.navigate('NetPercent');
+        }}>
+        <Text style={styles.HomeMenuItemText}>NET % CHANGE</Text>
+      </Pressable>
+      <Pressable
+        style={styles.HomeMenuItemStyles}
+        onPress={() => {
+          navigation.navigate('NetInterest');
+        }}>
+        <Text style={styles.HomeMenuItemText}>NET INTEREST RATE</Text>
       </Pressable>
     </ScrollView>
   );

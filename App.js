@@ -16,6 +16,10 @@ import SquareRoots from './src/screens/SquareRoots';
 import CubeRoots from './src/screens/CubeRoots';
 import Decimals from './src/screens/Decimals';
 import FractionPercentage from './src/screens/FractionPercentage';
+import NetDiscount from './src/screens/NetDiscount';
+import NetPercent from './src/screens/NetPercent';
+import NetInterest from './src/screens/NetInterest';
+import Triplets from './src/screens/Triplets';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -74,6 +78,26 @@ export default function App() {
         <Stack.Screen
           name="Decimals"
           component={Decimals}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="Triplets"
+          component={Triplets}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="NetDiscount"
+          component={NetDiscount}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="NetPercent"
+          component={NetPercent}
+          options={{headerShown: false, animation: 'slide_from_right'}}
+        />
+        <Stack.Screen
+          name="NetInterest"
+          component={NetInterest}
           options={{headerShown: false, animation: 'slide_from_right'}}
         />
       </Stack.Navigator>
