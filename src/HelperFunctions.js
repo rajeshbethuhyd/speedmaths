@@ -142,7 +142,6 @@ export function FractionPercentageValuesMore() {
   }
   let randomIndex = getRandomNumber(0, tempFractions2.length - 1);
   let randomFraction = tempFractions2[randomIndex];
-  console.log('randomFraction: ' + randomFraction);
   while (newBeginnning == true && lastRandomFraction2 == randomFraction) {
     randomIndex = getRandomNumber(0, tempFractions2.length - 1);
     randomFraction = tempFractions2[randomIndex];
@@ -220,7 +219,6 @@ export function GetRandomTriplets1() {
   }
   let randomIndex = getRandomNumber(0, tempserial_order1.length - 1);
   let randomNumber = tempserial_order1[randomIndex];
-  console.log('randomFraction: ' + randomNumber);
   while (newBeginnning == true && lastRandSerialIndex1 == randomNumber) {
     randomIndex = getRandomNumber(0, tempserial_order1.length - 1);
     randomNumber = tempserial_order1[randomIndex];
@@ -273,7 +271,6 @@ export function GetRandomTriplets2() {
   }
   let randomIndex = getRandomNumber(0, tempserial_order2.length - 1);
   let randomNumber = tempserial_order2[randomIndex];
-  console.log('randomFraction: ' + randomNumber);
   while (newBeginnning == true && lastRandSerialIndex2 == randomNumber) {
     randomIndex = getRandomNumber(0, tempserial_order2.length - 1);
     randomNumber = tempserial_order2[randomIndex];
