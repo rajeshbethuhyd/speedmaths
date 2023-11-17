@@ -282,3 +282,39 @@ export function GetRandomTriplets2() {
   }
   return getTriplet(randomNumber, 2);
 }
+
+var discountPercentagesEasy = [
+  5, 10, 15, 30, 70, 90, 50, 33.33, 66.66, 25, 75, 20, 40, 60, 80, 16.66, 14.28,
+  12.5, 11.11, 9.09, 8.33, 6.25,
+];
+var indexOfdiscountEasy = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+];
+
+let tempdiscountPercentagesEasy = discountPercentagesEasy.slice();
+let tempindexOfdiscountEasy = indexOfdiscountEasy.slice();
+let lastRandomDiscount1 = null;
+export function GetDiscountNums() {
+  let newBeginnning = false;
+  if (tempindexOfdiscountEasy.length == 0) {
+    newBeginnning = true;
+    tempindexOfdiscountEasy = indexOfdiscountEasy;
+  }
+  let randomIndex = getRandomNumber(0, tempindexOfdiscountEasy.length - 1);
+  let randomNumber = tempdiscountPercentagesEasy[randomIndex];
+  while (newBeginnning == true && lastRandomDiscount1 == randomNumber) {
+    randomIndex = getRandomNumber(0, tempindexOfdiscountEasy.length - 1);
+    randomNumber = tempdiscountPercentagesEasy[randomIndex];
+  }
+  tempindexOfdiscountEasy.splice(randomIndex, 1);
+  tempdiscountPercentagesEasy.splice(randomIndex, 1);
+  if (tempindexOfdiscountEasy.length == 0) {
+    lastRandomDiscount1 = randomNumber;
+  }
+
+  let randomNumber2 =
+    tempdiscountPercentagesEasy[
+      getRandomNumber(0, indexOfdiscountEasy.length - 1)
+    ];
+  return [randomNumber, randomNumber2];
+}

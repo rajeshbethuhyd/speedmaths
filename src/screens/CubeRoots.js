@@ -73,6 +73,7 @@ export default function CubeRoots({navigation}) {
               setLevel(itemValue);
               setShowAns(false);
               setInit(true);
+              setUserAns('');
             }}
             style={{height: 44}}
             itemStyle={{height: 44}}>
